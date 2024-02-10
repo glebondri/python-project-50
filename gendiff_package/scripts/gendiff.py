@@ -1,4 +1,5 @@
 import argparse
+from gendiff_package.gendiff import generate_diff
 
 
 def main():
@@ -9,5 +10,8 @@ def main():
     parser.add_argument('first_file')
     parser.add_argument('second_file')
 
-    # arguments = parser.parse_args()
-    parser.parse_args()
+    arguments = parser.parse_args()
+    file_a, file_b = arguments.first_file, arguments.second_file
+
+    diff = generate_diff(file_a, file_b)
+    print(diff)
