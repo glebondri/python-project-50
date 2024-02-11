@@ -3,8 +3,10 @@ from gendiff_package.gendiff import generate_diff
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Compares two configuration files and shows a difference.',
-                                     add_help=True)
+    parser = argparse.ArgumentParser(
+        description='Compares two configuration files and shows a difference.',
+        add_help=True
+    )
 
     parser.add_argument('-f', '--format', help='set format of output')
     parser.add_argument('first_file')
