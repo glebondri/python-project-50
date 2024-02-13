@@ -44,7 +44,12 @@ def generate_diff(a, b):
 
 
 # if __name__ == '__main__':
-#     diff = generate_diff('file5.json', 'file6.json')
+#     # there is a bug!
+#     # comparing smaller 'a' to larger 'b' (which has key closer to the very beginning of alphabet...
+#     # ...than 'a' does), breaks the comparison algorithm
+#     # (e.g. in obsidian)
+#
+#     diff = generate_diff('../a.json', '../b.json')
 #     print(diff)
-#     with open('../tests/fixtures/output.txt') as file:
-#         print(file.read())
+#     # with open('../tests/fixtures/output.txt') as file:
+#     #     print(file.read())
