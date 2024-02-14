@@ -45,7 +45,8 @@ def generate_diff(a, b):
 
 # if __name__ == '__main__':
 #     # there is a bug!
-#     # comparing smaller 'a' to larger 'b' (which has key closer to the very beginning of alphabet...
+#     # comparing smaller 'a' to larger 'b'
+#     # (which has key closer to the very beginning of alphabet...
 #     # ...than 'a' does), breaks the comparison algorithm
 #     # (e.g. in obsidian)
 #
