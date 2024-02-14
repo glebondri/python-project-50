@@ -1,0 +1,16 @@
+name: tests_and_linter
+
+on: push
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4 # setting up python
+        with:
+          python-version: 3.10
+        run: | # running both the tests & linter
+          pip install poetry
+          make install
+          make lint
+          make test
