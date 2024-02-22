@@ -1,41 +1,56 @@
 from gendiff_package.parser import parsed
-from gendiff_package.formation import formatted, formatted_diff
 
 
-def not_equal(a, b):
-    return a != b
-
-
-def has_equal_keys(a, b):
-    return a[0] == b[0]
-
-
-def generate_diff(a, b):
+def walk(a, b):
     diff = []
 
-    file_a, file_b = (sorted(parsed(a).items()),
-                      sorted(parsed(b).items()))
+    common_sequence = sorted((a | b).items())
+    keys_a, keys_b = (list(a.keys()),
+                      list(b.keys()))
+    values_a, values_b = (list(a.values()),
+                          list(b.values()))
 
-    index = 0
-    while True:
-        if index >= len(file_a):
-            if index < len(file_b):
-                diff.append(formatted(data=file_b.pop(index),
-                                      sign='+'))
+    for line in common_sequence:
+        key, value = line
 
+        if line in a.items() and line in b.items():
+            diff.append({'data': line, 'sign': '~'})
+
+        elif key in keys_a and key in keys_b:
+            index_a = keys_a.index(key)
+            index_b = keys_b.index(key)
+
+            value_a = values_a[index_a]
+            value_b = values_b[index_b]
+
+            if isinstance(value, dict):
+                diff.append({'data': (key, walk(
+                    value_a, value_b)), 'sign': '~'})
             else:
-                return formatted_diff(diff)
+                diff.append({'data': (key, value_a, value_b),
+                             'sign': '!'})  # aka. 'changed'
 
         else:
-            if not_equal(file_a[index], file_b[index]):
-                diff.append(formatted(data=file_a[index],
-                                      sign='-'))
+            diff.append({'data': line,
+                         'sign': ('+'
+                                  if key not in keys_a else
+                                  '-')})
 
-                if has_equal_keys(file_a[index], file_b[index]):
-                    diff.append(formatted(data=file_b.pop(index),
-                                          sign='+'))
-                file_a.pop(index)
+        # elif key not in keys_a:
+        #     diff.append({'data': line,
+        #                  'sign': '+'})
+        #
+        # elif key not in keys_b:
+        #     diff.append({'data': line,
+        #                  'sign': '-'})
 
-            else:
-                diff.append(formatted(data=file_a[index]))
-                index += 1
+    return diff
+
+
+def generate_diff(path_a, path_b):
+    data_a, data_b = (parsed(path_a),
+                      parsed(path_b))
+    if not data_a and not data_b:
+        return []
+
+    return walk(data_a, data_b)
