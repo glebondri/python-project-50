@@ -1,8 +1,0 @@
-{
-    "enabled": true,
-    "name": "hello_world",
-    "group": "hexlet",
-    "red": 255,
-    "green": 200,
-    "blue": 255
-  }
