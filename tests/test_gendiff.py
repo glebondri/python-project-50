@@ -1,32 +1,17 @@
 from gendiff_package.gendiff import generate_diff
-from gendiff_package.formation import format_stylish
 
-
-plain = generate_diff('tests/fixtures/plain1.json',
-                      'tests/fixtures/plain2.json')
-nested = generate_diff('tests/fixtures/nested1.json',
-                       'tests/fixtures/nested2.yml')
+stylish_fixture = generate_diff('tests/fixtures/nested1.json',
+                                'tests/fixtures/nested2.yml', 'stylish')
+plain_fixture = generate_diff('tests/fixtures/nested1.json',
+                              'tests/fixtures/nested2.yml', 'plain')
 
 
 def test_gendiff():
-    excepted = open('tests/fixtures/output1.txt', 'r')
+    stylish_excepted = open('tests/fixtures/output1.txt', 'r')
+    plain_excepted = open('tests/fixtures/output2.txt', 'r')
 
-    empty = generate_diff('tests/fixtures/empty.json',
-                          'tests/fixtures/empty.json')
+    assert stylish_fixture == stylish_excepted.read(), \
+        'unexpected output for \'stylish\' format!'
 
-    assert str(nested) == excepted.read(), 'unexpected output!'
-    assert empty == [], 'diff could be empty!'
-
-
-def test_gendiff_formation():
-    formatted_plain = format_stylish(plain)
-    formatted_nested = format_stylish(nested)
-
-    expected_plain = open('tests/fixtures/output2.txt', 'r')
-    expected_nested = open('tests/fixtures/output3.txt', 'r')
-
-    assert formatted_plain == expected_plain.read(), \
-        'unexpected output for plain data!'
-
-    assert formatted_nested == expected_nested.read(), \
-        'unexpected output for plain data'
+    assert plain_fixture == plain_excepted.read(), \
+        'unexpected output for \'plain\' format!'
