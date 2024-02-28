@@ -3,7 +3,7 @@ from gendiff_package.formation import stylish
 from gendiff_package.formation import plain
 
 
-def walk(a, b):
+def compare(a: dict, b: dict) -> list:
     if not a and not b:
         return []
 
@@ -31,7 +31,7 @@ def walk(a, b):
 
             if isinstance(value, dict):
                 diff.append({'data': {'key': key,
-                                      'value': walk(value_a, value_b)},
+                                      'value': compare(value_a, value_b)},
                              'sign': '~'})
             else:
                 diff.append({'data': {'key': key,
@@ -58,10 +58,14 @@ def walk(a, b):
     return diff
 
 
-def generate_diff(path_a, path_b, out_format):
+def generate_diff(path_a: str, path_b: str, out_format: str) -> str:
+    """Looks for differences in both given files
+    :arg out_format: Format of the output ("stylish" or "plain")
+    :returns: Comparison result of both files in two possible formats"""
+
     data_a, data_b = (parsed(path_a),
                       parsed(path_b))
-    diff = walk(data_a, data_b)
+    diff = compare(data_a, data_b)
 
     alias = {
         'stylish': stylish.format,

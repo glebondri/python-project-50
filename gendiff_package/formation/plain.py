@@ -12,7 +12,9 @@ def formatted(arg):
     return alias[type(arg)] if type(arg) in alias else arg
 
 
-def format(diff):
+def format(diff: list):
+    """Formats the difference to be "plain"""
+
     result = []
 
     def walk(value, path):

@@ -67,11 +67,11 @@
 #     print(format(generate_diff('../../file1.json', '../../file2.json')))
 
 
-def format_string(key, value, sign=' ', depth=0):
+def format_string(key, value, sign=' ', depth=0) -> str:
     return '  ' * depth + f'{sign} {key}: {value}\n'
 
 
-def formatted(arg, depth=0):
+def formatted(arg):
     alias = {
         type(None): 'null',
         bool: str(arg).lower(),
@@ -79,7 +79,7 @@ def formatted(arg, depth=0):
     return alias[type(arg)] if type(arg) in alias else arg
 
 
-def format_value(arg, depth=0):
+def format_value(arg, depth) -> str:
     if not isinstance(arg, dict):
         return formatted(arg)
 
@@ -98,7 +98,9 @@ def format_value(arg, depth=0):
     return walk(arg, depth + 1)
 
 
-def format(diff):
+def format(diff: list):
+    """Formats the difference to be "stylish"""
+
     if not diff:
         return '{}'
 

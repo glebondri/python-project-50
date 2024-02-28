@@ -2,7 +2,7 @@ import json
 import yaml
 
 
-def parsed(path):
+def parsed(path: str) -> dict | None:
     with open(path, 'r') as file:
         if path.endswith('.json'):
             return json.load(file)
