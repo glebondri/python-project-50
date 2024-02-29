@@ -1,0 +1,160 @@
+[
+    {
+        "data": {
+            "key": "common",
+            "value": [
+                {
+                    "data": {
+                        "key": "follow",
+                        "value": false
+                    },
+                    "state": "added"
+                },
+                {
+                    "data": {
+                        "key": "setting1",
+                        "value": "Value 1"
+                    },
+                    "state": "unchanged"
+                },
+                {
+                    "data": {
+                        "key": "setting2",
+                        "value": 200
+                    },
+                    "state": "removed"
+                },
+                {
+                    "data": {
+                        "key": "setting3",
+                        "value": {
+                            "old": true,
+                            "new": null
+                        }
+                    },
+                    "state": "changed"
+                },
+                {
+                    "data": {
+                        "key": "setting4",
+                        "value": "blah blah"
+                    },
+                    "state": "added"
+                },
+                {
+                    "data": {
+                        "key": "setting5",
+                        "value": {
+                            "key5": "value5"
+                        }
+                    },
+                    "state": "added"
+                },
+                {
+                    "data": {
+                        "key": "setting6",
+                        "value": [
+                            {
+                                "data": {
+                                    "key": "doge",
+                                    "value": [
+                                        {
+                                            "data": {
+                                                "key": "wow",
+                                                "value": {
+                                                    "old": "",
+                                                    "new": "so much"
+                                                }
+                                            },
+                                            "state": "changed"
+                                        }
+                                    ]
+                                },
+                                "state": "unchanged"
+                            },
+                            {
+                                "data": {
+                                    "key": "key",
+                                    "value": "value"
+                                },
+                                "state": "unchanged"
+                            },
+                            {
+                                "data": {
+                                    "key": "ops",
+                                    "value": "vops"
+                                },
+                                "state": "added"
+                            }
+                        ]
+                    },
+                    "state": "unchanged"
+                }
+            ]
+        },
+        "state": "unchanged"
+    },
+    {
+        "data": {
+            "key": "group1",
+            "value": [
+                {
+                    "data": {
+                        "key": "baz",
+                        "value": {
+                            "old": "bas",
+                            "new": "bars"
+                        }
+                    },
+                    "state": "changed"
+                },
+                {
+                    "data": {
+                        "key": "foo",
+                        "value": "bar"
+                    },
+                    "state": "unchanged"
+                },
+                {
+                    "data": {
+                        "key": "nest",
+                        "value": {
+                            "old": {
+                                "key": "value"
+                            },
+                            "new": "str"
+                        }
+                    },
+                    "state": "changed"
+                }
+            ]
+        },
+        "state": "unchanged"
+    },
+    {
+        "data": {
+            "key": "group2",
+            "value": {
+                "abc": 12345,
+                "deep": {
+                    "id": 45
+                }
+            }
+        },
+        "state": "removed"
+    },
+    {
+        "data": {
+            "key": "group3",
+            "value": {
+                "deep": {
+                    "id": {
+                        "number": 45
+                    }
+                },
+                "fee": 100500
+            }
+        },
+        "state": "added"
+    }
+]
