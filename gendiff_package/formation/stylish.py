@@ -99,7 +99,7 @@ def format_value(arg, depth) -> str:
 
 
 def format(diff: list):
-    """Formats the difference to be "stylish"""
+    """Formats the difference to be "stylish\""""
 
     if not diff:
         return '{}'
@@ -108,11 +108,11 @@ def format(diff: list):
         result = []
 
         for line in value:
-            data, sign = line.values()
+            data, state = line.values()
             key, value = data.values()
 
-            match sign:
-                case '!':
+            match state:
+                case 'changed':
                     result.append(
                         format_string(key,
                                       format_value(value['old'], depth),
@@ -122,7 +122,7 @@ def format(diff: list):
                                       format_value(value['new'], depth),
                                       sign='+', depth=depth))
 
-                case '~':
+                case 'unchanged':
                     if isinstance(value, list):
                         result.append(format_string(key,
                                                     walk(value, depth + 2),
@@ -133,9 +133,16 @@ def format(diff: list):
                                                     depth=depth))
 
                 case _:
-                    result.append(format_string(key, format_value(value,
-                                                                  depth),
-                                                sign=sign, depth=depth))
+                    alias = {
+                        'added': '+',
+                        'removed': '-'
+                    }
+
+                    if state in alias:
+                        result.append(format_string(key, format_value(value,
+                                                                      depth),
+                                                    sign=alias[state],
+                                                    depth=depth))
 
         string = ''.join(result) + '  ' * (depth - 1)
         return f'{{\n{string}}}'
