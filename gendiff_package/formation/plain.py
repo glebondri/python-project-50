@@ -13,39 +13,39 @@ def formatted(arg):
 
 
 def format(diff: list):
-    """Formats the difference to be "plain"""
+    """Formats the difference to be "plain\""""
 
     result = []
 
     def walk(value, path):
         for line in value:
-            data, sign = line.values()
+            data, state = line.values()
             key, value = data.values()
 
             string_path = '.'.join(path + [key])
 
-            match sign:
-                case '!':
+            match state:
+                case 'changed':
                     result.append(' '.join((PROPERTY.format(string_path),
                                             UPDATED.format(
                                                 formatted(value['old']),
                                                 formatted(value['new']))
                                             )))
 
-                case '~':
+                case 'unchanged':
                     if isinstance(value, list):
                         walk(value, path + [key])
 
                 case _:
                     alias = {
-                        '+': [PROPERTY.format(string_path),
-                              ADDED.format(formatted(value))],
-                        '-': [PROPERTY.format(string_path),
-                              REMOVED]
+                        'added': [PROPERTY.format(string_path),
+                                  ADDED.format(formatted(value))],
+                        'removed': [PROPERTY.format(string_path),
+                                    REMOVED]
                     }
 
-                    if sign in alias:
-                        result.append(' '.join(alias[sign]))
+                    if state in alias:
+                        result.append(' '.join(alias[state]))
 
         return '\n'.join(result)
 
