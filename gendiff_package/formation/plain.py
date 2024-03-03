@@ -11,9 +11,16 @@ def formatted(arg):
 
     return alias[type(arg)] if type(arg) in alias else arg
 
+# plain_rules = {
+#     type(None): 'null',
+#     dict: '[complex value]',
+#     bool: lambda arg: str(arg).lower(),
+#     str: lambda arg: f'\'{arg}\''
+# }
+
 
 def format(diff: list):
-    """Formats the difference to be "plain\""""
+    """Formats the "diff" to be "plain\""""
 
     result = []
 
@@ -26,10 +33,12 @@ def format(diff: list):
 
             match state:
                 case 'changed':
+                    old_value = formatted(value['old'])
+                    new_value = formatted(value['new'])
+
                     result.append(' '.join((PROPERTY.format(string_path),
-                                            UPDATED.format(
-                                                formatted(value['old']),
-                                                formatted(value['new']))
+                                            UPDATED.format(old_value,
+                                                           new_value)
                                             )))
 
                 case 'unchanged':
@@ -37,9 +46,11 @@ def format(diff: list):
                         walk(value, path + [key])
 
                 case _:
+                    value = formatted(value)
+
                     alias = {
                         'added': [PROPERTY.format(string_path),
-                                  ADDED.format(formatted(value))],
+                                  ADDED.format(value)],
                         'removed': [PROPERTY.format(string_path),
                                     REMOVED]
                     }
