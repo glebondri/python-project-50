@@ -57,7 +57,8 @@ def compare(a: dict, b: dict) -> list:
     return diff
 
 
-def generate_diff(path_a: str, path_b: str, out_format: str) -> str:
+def generate_diff(path_a: str, path_b: str, out_format='stylish') -> str:
+
     """Looks for a differences relatively of \'original\' file to \'new\'
     :arg path_a: Path to the \'original\' file
     :arg path_b: Path to the \'new\' file
