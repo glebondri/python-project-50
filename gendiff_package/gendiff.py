@@ -1,4 +1,4 @@
-from gendiff_package.parser import parsed
+from gendiff_package import parser
 from gendiff_package.formation import stylish, plain, jsonify
 
 
@@ -58,21 +58,24 @@ def compare(a: dict, b: dict) -> list:
 
 
 def generate_diff(path_a: str, path_b: str, out_format: str) -> str:
-    """Looks for a differences relatively of original file to new
-    :arg path_a: Path to the original file
-    :arg path_b: Path to the new file
-    :arg out_format: Format of the output ("stylish" or "plain")
-    :returns: Comparison result in one of two possible formats"""
+    """Looks for a differences relatively of \'original\' file to \'new\'
+    :arg path_a: Path to the \'original\' file
+    :arg path_b: Path to the \'new\' file
+    :arg out_format: Format of the output ("stylish", "plain" or "json")
+    :returns: Comparison result in specified format"""
 
-    data_a, data_b = (parsed(path_a),
-                      parsed(path_b))
+    file_a = open(path_a, 'r')
+    file_b = open(path_b, 'r')
+
+    data_a, data_b = (parser.parse(file_a),
+                      parser.parse(file_b))
     diff = compare(data_a, data_b)
 
-    alias = {
+    formats = {
         'stylish': stylish.format,
         'plain': plain.format,
         'json': jsonify.format
     }
 
-    if out_format in alias:
-        return alias[out_format](diff)
+    if out_format in formats:
+        return formats[out_format](diff)
