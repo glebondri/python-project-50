@@ -1,4 +1,4 @@
-from gendiff_package.titles import PROPERTY, ADDED, REMOVED, UPDATED
+from gendiff.titles import PROPERTY, ADDED, REMOVED, UPDATED
 
 
 def formatted(arg):

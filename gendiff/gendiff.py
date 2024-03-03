@@ -1,5 +1,5 @@
-from gendiff_package import parser
-from gendiff_package.formation import stylish, plain, jsonify
+from gendiff import parser
+from gendiff.formation import stylish, plain, jsonify
 
 
 def compare(a: dict, b: dict) -> list:
