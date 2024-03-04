@@ -28,7 +28,7 @@ def compare(a: dict, b: dict) -> list:
             value_a = values_a[index_a]
             value_b = values_b[index_b]
 
-            if isinstance(value, dict):
+            if isinstance(value_a, dict) and isinstance(value_b, dict):
                 diff.append({'data': {'key': key,
                                       'value': compare(value_a, value_b)},
                              'state': 'unchanged'})
