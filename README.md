@@ -34,9 +34,9 @@ Property 'common.setting2' was removed
 Property 'common.setting3' was updated. From true to null
 ...
 ```
- **"Stylish"'** format outputs pretty-looking string with the use of **curly brackets & indentation**, like JSON
+**"Stylish"** format outputs pretty-looking string with the use of **curly brackets & indentation**, like JSON
  
- **"Plain"** format shows step-by-step what exactly changed in the **new** file relative to **original**
+**"Plain"** format shows step-by-step what exactly changed in the **new** file relative to **original**
  
 **"Json"** format gives the "raw" comparison data as **JSON**
 
