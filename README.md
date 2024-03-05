@@ -13,7 +13,7 @@
  - Python (^3.10)
  - Poetry
 
-## Installation [(Asciinema)](https://asciinema.org/a/xyKD1e9b4TrqMcaP4qkFPY1n9):
+## Installation [(Asciinema)](https://asciinema.org/a/cnOp2AfGR8YDGhaL0Crp1CzX9):
     $ git clone https://github.com/glebondri/python-project-50
     $ cd python-project-50
     $ make build
