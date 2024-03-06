@@ -6,7 +6,7 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/52a1468053b6d4085b22/test_coverage)](https://codeclimate.com/github/glebondri/python-project-50/test_coverage)
 
 # Comparison Tool
-**A Python CLI tool to compare files**
+**A Python CLI tool to compare configuration files**
 
 
 ## Requirements:
@@ -38,7 +38,7 @@ Property 'common.setting3' was updated. From true to null
  
 **"Plain"** format shows step-by-step what exactly changed in the **new** file relative to **original**
  
-**"Json"** format gives the "raw" comparison data as **JSON**
+**"Json"** format outputs the "raw" comparison data as **JSON**
 
 
 ## Usage:
