@@ -1,4 +1,4 @@
-from gendiff.gendiff import generate_diff
+from gendiff.comparison import generate_diff
 
 stylish_fixture = generate_diff('tests/fixtures/nested1.json',
                                 'tests/fixtures/nested2.yml', 'stylish')
