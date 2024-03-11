@@ -86,16 +86,14 @@
 #     return walk(diff, 1)
 from gendiff.shared import get_key, get_value
 from gendiff.shared import get_children, get_status, is_leaf
-
-# def format_nested(value):
-#     return map(format_string(),value)
+from typing import Any
 
 
-def brace(string, depth=0):
+def brace(string: str, depth=0) -> str:
     return '{\n' + string + '  ' * depth + '}'
 
 
-def format_complex(value, depth):
+def format_complex(value: dict, depth: int) -> str:
     new_value = []
 
     for line in value.items():
@@ -107,9 +105,9 @@ def format_complex(value, depth):
     return brace(''.join(new_value), depth + 1)
 
 
-def format_string(key, value, depth, status=None):
+def format_string(key: str, value: Any, depth: int, status=None) -> str:
 
-    def format_value(value):
+    def format_value(value: Any):
         if isinstance(value, dict):
             return format_complex(value, depth)
 
@@ -120,12 +118,6 @@ def format_string(key, value, depth, status=None):
             return 'null'
 
         return value
-        # new_value = []
-        # for line in value.items():
-        #     sub_key, sub_value = line
-        #
-        #     new_value.append(format_string(sub_key, sub_value,
-        #                                    depth + 2))
 
     string = '  ' * depth + '{sign} {key}: {value}\n'
 
@@ -146,7 +138,7 @@ def format_string(key, value, depth, status=None):
     return old_string + new_string
 
 
-def format_line(line, depth):
+def format_line(line: dict, depth: int) -> str:
     key = get_key(line)
     status = get_status(line)
 
@@ -160,6 +152,8 @@ def format_line(line, depth):
                          depth)
 
 
-def format(diff):
+def format(diff: list) -> str:
+    """Formats the difference to be \"stylish\""""
+
     result = map(lambda x: format_line(x, 1), diff)
     return brace(''.join(result))
