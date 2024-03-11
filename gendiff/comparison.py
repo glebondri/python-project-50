@@ -40,8 +40,6 @@ def compare(a: dict, b: dict) -> list:
         if line in a.items() and line in b.items():
             diff.append({'name': key, 'value': value,
                          'status': 'unchanged'})
-            # diff.append({'data': {'key': key,
-            #                       'value': value}, 'state': 'unchanged'})
 
         elif key in keys_a and key in keys_b:
             index_a = keys_a.index(key)
@@ -53,69 +51,17 @@ def compare(a: dict, b: dict) -> list:
             if isinstance(value_a, dict) and isinstance(value_b, dict):
                 diff.append({'name': key, 'children': compare(value_a, value_b),
                              'status': 'unchanged'})
-                # diff.append({'data': {'key': key,
-                #                       'value': compare(value_a, value_b)},
-                #              'state': 'unchanged'})
+
             else:
                 diff.append({'name': key, 'value': {'old': value_a,
                                                     'new': value_b},
                             'status': 'changed'})
-                # diff.append({'data': {'key': key,
-                #                       'value': {
-                #                           'old': value_a,
-                #                           'new': value_b}},
-                #              'state': 'changed'})
 
         else:
             status = 'added' if key in keys_b else 'removed'
 
             diff.append({'name': key, 'value': value,
                          'status': status})
-            # diff.append({'data': {'key': key,
-            #                       'value': value},
-            #              'state': ('added'
-            #                        if key not in keys_a else
-            #                        'removed')})
-
-    # for line in common_sequence:
-    #     key, value = line
-    #
-    #     if line in a.items() and line in b.items():
-    #         diff.append({'data': {'key': key,
-    #                               'value': value}, 'state': 'unchanged'})
-    #
-    #     elif key in keys_a and key in keys_b:
-    #         index_a = keys_a.index(key)
-    #         index_b = keys_b.index(key)
-    #
-    #         value_a = values_a[index_a]
-    #         value_b = values_b[index_b]
-    #
-    #         if isinstance(value_a, dict) and isinstance(value_b, dict):
-    #             diff.append({'data': {'key': key,
-    #                                   'value': compare(value_a, value_b)},
-    #                          'state': 'unchanged'})
-    #         else:
-    #             diff.append({'data': {'key': key,
-    #                                   'value': {
-    #                                       'old': value_a,
-    #                                       'new': value_b}},
-    #                          'state': 'changed'})
-    #
-    #     else:
-    #         diff.append({'data': {'key': key,
-    #                               'value': value},
-    #                      'state': ('added'
-    #                                if key not in keys_a else
-    #                                'removed')})
-    #
-    #     # elif key not in keys_a:
-    #     #     diff.append({'data': line,
-    #     #                  'sign': '+'})
-    #     #
-    #     # elif key not in keys_b:
-    #     #     diff.append({'data': line,
-    #     #                  'sign': '-'})
 
     return diff
 
@@ -143,7 +89,3 @@ def generate_diff(path_a: str, path_b: str, out_format='stylish') -> str:
 
     if out_format in formats:
         return formats[out_format](diff)
-
-
-# if __name__ == '__main__':
-#     print(generate_diff('file_a.json', 'file_b.json', 'json'))
