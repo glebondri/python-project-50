@@ -13,14 +13,16 @@ def format_value(value) -> str:
     if value is None:
         return 'null'
 
-    elif isinstance(value, bool):
-        return str(value).lower()
+    types = {
+        bool: str(value).lower(),
+        str: f'\'{value}\'',
+        dict: '[complex value]'
+    }
 
-    elif isinstance(value, str):
-        return f'\'{value}\''
+    value_type = type(value)
 
-    elif isinstance(value, dict):
-        return '[complex value]'
+    if value_type in types:
+        return types.get(value_type)
 
     return value
 
