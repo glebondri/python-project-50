@@ -4,7 +4,7 @@ from gendiff.titles import PROPERTY, ADDED, REMOVED, UPDATED
 from typing import Any
 
 
-def filter_line(line):
+def filter_line(line: dict) -> bool:
     return (get_status(line) != 'unchanged'
             or not is_leaf(line))
 

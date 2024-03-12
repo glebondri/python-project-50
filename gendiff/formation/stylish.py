@@ -3,7 +3,7 @@ from gendiff.shared import get_children, get_status, is_leaf
 from typing import Any
 
 
-def get_sign(status):
+def get_sign(status: str) -> str:
     return ('+' if status == 'added' else
             '-' if status == 'removed' else
             ' ')
