@@ -105,30 +105,31 @@ def format_complex(value: dict, depth: int) -> str:
     return brace(''.join(new_value), depth + 1)
 
 
+def format_value(value: Any, depth: int):
+    if value is None:
+        return 'null'
+
+    elif isinstance(value, dict):
+        return format_complex(value, depth)
+
+    elif isinstance(value, bool):
+        return str(value).lower()
+
+    return value
+
+
 def format_string(key: str, value: Any, depth: int, status=None) -> str:
-
-    def format_value(value: Any):
-        if isinstance(value, dict):
-            return format_complex(value, depth)
-
-        elif isinstance(value, bool):
-            return str(value).lower()
-
-        elif value is None:
-            return 'null'
-
-        return value
-
     string = '  ' * depth + '{sign} {key}: {value}\n'
 
     if status != 'changed':
         return string.format(sign=('+' if status == 'added' else
                                    '-' if status == 'removed' else
                                    ' '),
-                             key=key, value=format_value(value))
+                             key=key,
+                             value=format_value(value, depth))
 
-    old_value = format_value(value['old'])
-    new_value = format_value(value['new'])
+    old_value = format_value(value['old'], depth)
+    new_value = format_value(value['new'], depth)
 
     old_string = string.format(sign='-', key=key,
                                value=old_value)
