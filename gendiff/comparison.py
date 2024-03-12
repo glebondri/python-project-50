@@ -2,26 +2,6 @@ from gendiff import parser
 from gendiff.formation import stylish, plain, jsonify
 
 
-def get_key(line):
-    return line['name']
-
-
-def get_value(line):
-    return line['value']
-
-
-def get_status(line):
-    return line['status']
-
-
-def get_children(line):
-    return line['children']
-
-
-def is_leaf(line):
-    return 'value' in line
-
-
 def compare(a: dict, b: dict) -> list:
     if not a and not b:
         return []
