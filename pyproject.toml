@@ -1,9 +1,10 @@
 [tool.poetry]
 name = "hexlet-code"
 version = "0.1.0"
-description = ""
-authors = ["Your Name <you@example.com>"]
+description = "Python CLI tool to compare configuration files"
+authors = ["glebondri <launcher.zet@gmail.com>"]
 readme = "README.md"
+repository = "https://github.com/glebondri/python-project-50"
 packages = [
     {include = 'gendiff'}
 ]
