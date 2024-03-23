@@ -69,3 +69,5 @@ def generate_diff(path_a: str, path_b: str, out_format='stylish') -> str:
 
     if out_format in formats:
         return formats[out_format](diff)
+
+    raise Exception(f'Unknown format \"{out_format}\"!')
